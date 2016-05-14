@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "ejs": "^2.4.1",
     "log4js": "^0.6.36",
     "mssql": "^3.3.0"
   },
