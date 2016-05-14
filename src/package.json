@@ -1,0 +1,16 @@
+{
+  "name": "req",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "log4js": "^0.6.36",
+    "mssql": "^3.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mrlong",
+  "license": "ISC"
+}
