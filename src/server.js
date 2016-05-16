@@ -34,13 +34,13 @@ module.exports = function(log){
       c.write(new Buffer('24303052503033320D','hex'));
       c.pipe(c);
       log.info('发送指令到:' + c.sbcode);
-    },1000*5) //5ms
+    },1000*60) //1分钟
   
   });
 
   //出错。
-  server.setMaxListeners(10);
-  require('events').EventEmitter.prototype._maxListeners = 100;
+  //server.setMaxListeners(10);
+  //require('events').EventEmitter.prototype._maxListeners = 100;
   server.on('error', function (e) {
     log.error('Address in use, retrying...'+e);
   });
