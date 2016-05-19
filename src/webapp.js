@@ -12,7 +12,7 @@ var ejs = require('ejs');
 
 var config = {
   port: 8081,
-  index:'index.html',
+  //index:'',
   srcdir:'./webcontrollers',
   html:'./webcontent',
   staticdir:'./webcontent/public'     //静态文件目录
@@ -58,7 +58,7 @@ http.createServer(function(req,res,next){
   var pathname = url.parse(req.url).pathname;
   
   if (pathname === '/') {
-    pathname += config.index //默认页面
+    pathname += config.index || 'index' //默认页面
   };
   
   var ext = path.extname(pathname);

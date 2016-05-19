@@ -17,8 +17,8 @@ create table TB_SB_REQ(
  	ZCODE   varchar(50)  not null ,     /*设备编号*/ 
  	ZSTR	varchar(200) not null,      /*接收串*/ 
  	ZVOL	varchar(200),               /*温度*/ 
-    ZDATE  datetime,                    /*创建时间*/
-    ZIP     varchar(20),                /*ip地址*/
+    ZDATE  datetime                     /*创建时间*/
+
 
  	constraint TB_SB_REQ_PK primary key(ZID) 
  ) 

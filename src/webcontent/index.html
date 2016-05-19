@@ -1,10 +1,91 @@
 
   <%- include('./header.html') %>
   
+  <style>
+    table.voldata tr{
+      padding: 5px;
+    }  
+    
+    div.pagebar{
+      color: blueviolet;
+      padding: 20px;
+    }
+    
+    div.pagebar a{
+      padding: 5px;
+      text-decoration: none; 
+    }
+    
+    div.pagebar a.active{
+      background-color: aqua;
+    }
+    
+    
+    span.rowcount{
+      margin-left: 10px;
+      color: #333;
+    }
+  </style>
   
   <h1>显示内容</h1>
   
+  <table class="voldata"  border="1" >
+    
+    <tr>
+      <th style="width:50px">序号</th>
+      <th style="width:100px">设备</th>
+      <th style="width:100px">温度</th>
+      <th style="width:300px">接收数据</th>
+      <th style="width:300px">接收时间</th>
+    </tr>
+    
+    
+    <% for(var i=0;i < rows.length ; i++) { %>
+      
+      <tr>
+        <td><%=(i+1) + (curpage -1) * 20 %></td>
+        <td><%=rows[i].ZCODE%></td>
+        <td><%=rows[i].ZVOL%></td>
+        <td><%=rows[i].ZSTR%></td>
+        <td><%=rows[i].ZDATE.toLocaleDateString() %> <%=rows[i].ZDATE.toLocaleTimeString() %> </td>
+      </tr>
+    <%}%>
+    
+    
+  </table>
+  
+  <div class="pagebar"> 
+    <span class="rowcount">记录数:<%=rowcount%></span>
+  </div>
+  
   
   </div> <!-- content -->
-  <%- include('./footer.html') %>
+
+<script>
+  $(document).ready(function(){
+    
+    var pagecount = parseInt(<%=rowcount%>/20);
+                             
+    if( <%=rowcount%> > 20){
+      if(<%=rowcount%> % 20 >0){
+        pagecount ++;
+      };
+    };
+    
+    
+    for(var i=0;i<pagecount;i++){
+      var a = $('<a></a>');
+      a.attr('href','/index?page='+(i+1));
+      a.text(i+1);
+      if(i+1==<%=curpage%>){
+         a.addClass('active');
+      }
+      $('div.pagebar .rowcount').before(a);  
+    };
+    
+  });
+          
+</script>  
+  
+<%- include('./footer.html') %>
   

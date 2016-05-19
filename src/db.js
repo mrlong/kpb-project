@@ -4,13 +4,41 @@
  */
 
 
-var sql = require('mssql');
+var mssql = require('mssql');
 var config = require('./config.js');
+
+
+//读取库的内容
+//查询sql
+// cb = function(err,data); 其中data是返回值
+//
+exports.query = function(sql,cb){
+  
+  var connection = new mssql.Connection(config.mssql, function(err) {
+    if(!err){
+      var request = new mssql.Request(connection); 
+      request.query(sql,function(err,recordset){
+        if(!err){
+          if(cb) cb(null,recordset); 
+          connection.close();
+        }
+        else{
+          connection.close();
+          if(cb) cb(err);
+        }
+      });
+    }
+    else{
+      if(cb) cb(err);
+    }
+  });
+};
+
 
 //写入请求的数据，中间的转换过程。
 //   datastr 的格式：*16+00.02434
 exports.writeREQ = function(sbcode,datastr,log){
-  var connection = new sql.Connection(config.mssql);
+  var connection = new mssql.Connection(config.mssql);
   connection.connect(function(err) {
     if(!err){
       var vals = datastr.split('+');
@@ -27,10 +55,10 @@ exports.writeREQ = function(sbcode,datastr,log){
               myvol + ",'" +
               datastr + "',GETDATE())";
       
-      var transaction = new sql.Transaction(connection);
+      var transaction = new mssql.Transaction(connection);
       transaction.begin(function(err) {
         if(!err){
-          var request = new sql.Request(transaction);
+          var request = new mssql.Request(transaction);
           request.query(sqltxt,function(err){
             if(!err){
               transaction.commit(function(err, recordset) {
