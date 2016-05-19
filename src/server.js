@@ -17,12 +17,17 @@ module.exports = function(log){
      var mystr = chunk.toString();
      //重新建立连接。      
      if(mystr.indexOf('xs,')==0){
-       c.sbcode = mystr; 
-       log.info('first connected:' + mystr);
+        c.sbcode = mystr; 
+        log.info('first connected:' + mystr);
      }
      else{
-        Db(c.sbcode,mystr,log); //写库入 
-        log.info('other:' + mystr)
+        if(mystr == '$'){
+          //客户的心跳  
+        }
+        else{
+          Db.writeREQ(c.sbcode,mystr,log); //写库入 
+          log.info('other:' + mystr);
+        };
      }
     }); 
 
@@ -34,7 +39,7 @@ module.exports = function(log){
       c.write(new Buffer('24303052503033320D','hex'));
       c.pipe(c);
       log.info('发送指令到:' + c.sbcode);
-    },1000*60) //1分钟
+    },1000*60*5) //5分钟
   
   });
 

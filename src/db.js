@@ -7,12 +7,24 @@
 var sql = require('mssql');
 var config = require('./config.js');
 
-module.exports = function(sbcode,datastr,log){
+//写入请求的数据，中间的转换过程。
+//   datastr 的格式：*16+00.02434
+exports.writeREQ = function(sbcode,datastr,log){
   var connection = new sql.Connection(config.mssql);
   connection.connect(function(err) {
     if(!err){
-      var sqltxt = "insert into TB_SB_REQ(ZCODE,ZSTR,ZDATE) values('" + 
-              sbcode +"','" +
+      var vals = datastr.split('+');
+      if(vals.length != 2){
+        log && log.error('客户端返回参数出错! ' + datastr);
+        connection.close();
+        return false;  
+      };
+      
+      var myvol = parseFloat(vals[1]).toFixed(3);
+      
+      var sqltxt = "insert into TB_SB_REQ(ZCODE,ZVOL,ZSTR,ZDATE) values('" + 
+              sbcode +"'," +
+              myvol + ",'" +
               datastr + "',GETDATE())";
       
       var transaction = new sql.Transaction(connection);
