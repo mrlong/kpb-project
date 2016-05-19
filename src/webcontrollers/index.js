@@ -6,14 +6,14 @@ var Db = require('../db.js');
 
 exports.processRequest = function (req, res) {
   
-  var page = 1;// req.query.page || 1;
+  var page = req.query.page || 1;
   
   var mysqltxt;
   if(page==1){
-    mysqltxt = 'select top 20 ZCODE,ZSTR,ZVOL,ZDATE from TB_SB_REQ order by ZDATE desc ';
+    mysqltxt = 'select top 20 ZCODE,ZSTR,ZVOL,ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd from TB_SB_REQ order by ZDATE desc ';
   }
   else{
-    mysqltxt = 'select TOP 20 ZCODE,ZSTR,ZVOL,ZDATE from TB_SB_REQ where ZID not in(' + 
+    mysqltxt = 'select TOP 20 ZCODE,ZSTR,ZVOL,ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd from TB_SB_REQ where ZID not in(' + 
               'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ order by ZDATE desc) order by ZDATE desc ';
   };
   

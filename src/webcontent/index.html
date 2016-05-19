@@ -8,7 +8,7 @@
     
     div.pagebar{
       color: blueviolet;
-      padding: 20px;
+      padding: 20px 0px 20px 0px;
     }
     
     div.pagebar a{
@@ -29,7 +29,7 @@
   
   <h1>显示内容</h1>
   
-  <table class="voldata"  border="1" >
+  <table class="voldata"  border="1" width="100%">
     
     <tr>
       <th style="width:50px">序号</th>
@@ -47,7 +47,7 @@
         <td><%=rows[i].ZCODE%></td>
         <td><%=rows[i].ZVOL%></td>
         <td><%=rows[i].ZSTR%></td>
-        <td><%=rows[i].ZDATE.toLocaleDateString() %> <%=rows[i].ZDATE.toLocaleTimeString() %> </td>
+        <td> <%=rows[i].myd %> </td>
       </tr>
     <%}%>
     
@@ -55,7 +55,7 @@
   </table>
   
   <div class="pagebar"> 
-    <span class="rowcount">记录数:<%=rowcount%></span>
+    
   </div>
   
   
@@ -63,6 +63,7 @@
 
 <script>
   $(document).ready(function(){
+    
     
     var pagecount = parseInt(<%=rowcount%>/20);
                              
@@ -72,7 +73,6 @@
       };
     };
     
-    
     for(var i=0;i<pagecount;i++){
       var a = $('<a></a>');
       a.attr('href','/index?page='+(i+1));
@@ -80,8 +80,10 @@
       if(i+1==<%=curpage%>){
          a.addClass('active');
       }
-      $('div.pagebar .rowcount').before(a);  
+      $('div.pagebar').append(a);  
     };
+                    
+    $('div.pagebar').append($('<span class="rowcount">记录数:<%=rowcount%></span>'));
     
   });
           

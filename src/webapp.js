@@ -8,6 +8,7 @@ var http = require("http");
 var url = require("url");
 var path = require('path');
 var ejs = require('ejs');
+var qs = require('querystring');
 
 
 var config = {
@@ -98,6 +99,8 @@ http.createServer(function(req,res,next){
                   {filename:localfilename})
                 );
               };
+              var getQuery = url.parse(req.url).query;
+              getQuery?req.query = qs.parse(getQuery):req.query={};
               handler.processRequest(req,res); //动态资源
             
           } else {
