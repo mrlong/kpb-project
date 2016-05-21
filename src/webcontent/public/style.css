@@ -1,0 +1,20 @@
+/*分页*/
+div.pagebar{
+  color: blueviolet;
+  padding: 20px 0px 20px 0px;
+}
+
+div.pagebar a{
+  padding: 5px;
+  text-decoration: none; 
+}
+
+div.pagebar a.active{
+  background-color: aqua;
+}
+
+
+div.pagebar span.rowcount{
+  margin-left: 10px;
+  color: #333;
+}
