@@ -19,7 +19,7 @@
                              
     if( rowcount > 20){
       if(rowcount % 20 > 0 ){
-        pagecount ++;
+        pagecount++;
       };
     };
     
@@ -52,10 +52,10 @@
       };
       a.text('1');
       this.append(a);
-      this.append($('<a href="javascript:;">...</a>'));
+      startpage !=2 && this.append($('<a href="javascript:;">...</a>'));
     };
     
-    for(var i=startpage;i<endpage;i++){
+    for(var i=startpage;i<=endpage;i++){
       var a = $('<a></a>');
       if(typeof cb =='string'){
         a.attr('href',cb.replace(/\$\$/g,i));
@@ -79,15 +79,13 @@
         //onclcik 处理  
       };
       a.text(pagecount);
-      this.append($('<a href="javascript:;">...</a>'));
+      endpage != pagecount-1 &&  this.append($('<a href="javascript:;">...</a>'));
       this.append(a);  
     };
     
-    
-                    
+                
     this.append($('<span class="rowcount">记录数:'+ rowcount +'</span>'));
   
-    
   }
   //
 });})(jQuery); 
