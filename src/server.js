@@ -18,6 +18,8 @@ module.exports = function(log){
      //重新建立连接。      
      if(mystr.indexOf('xs,')==0){
         c.sbcode = mystr; 
+        c.write(new Buffer('24303052503033320D','hex'));
+        c.pipe(c);
         log.info('first connected:' + mystr);
      }
      else{
