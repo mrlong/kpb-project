@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>显示结果</title>
   <script type="application/javascript" src="/jquery-1.11.0.min.js"></script>
+  <script type="application/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -19,15 +21,33 @@
   div.menu ul>li{
     padding: 5px;
   }
-  
-  div.content{
-    padding: 5px;
-    margin: 10px;    
-  }
-  
+
+
 </style>
 
 <body>
+
   
-  <div class='content'>
+<nav class="navbar navbar-inverse"  style="border-radius:0px">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">实时水情系统</a>
+    </div>
+    
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">退出</a></li>
+    </ul>
+      
+  </div><!-- /.container-fluid -->
+</nav>
+ 
+
+<div class='container'>
     

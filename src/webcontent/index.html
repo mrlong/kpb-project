@@ -1,25 +1,68 @@
 
-  <%- include('./header.html') %>
+<%- include('./header.html') %>
   
-  <style>
-    table.voldata tr{
-      padding: 5px;
-    }  
-    
+<style>
 
     
-  </style>
+  div.contentleft{
+    border-radius:4px;
+    background-color: #fff;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+    
+  div.contentleft table{
+    border: 2px solid #f2f2f2;
+  }
+    
   
-  <h1>显示内容</h1>
+  div.contentleft table th{
+    color: #d9534f;
+    background-color: #f2f2f2;
+    padding: 10px; 
+  }
+  div.contentleft .table td {
+     padding: 10px; 
+  }
+
+    
+  div.contentright{
+
+  }
+
+  div.contentright .logininfo{
+    border-radius:4px;
+    padding: 20px;
+    background-color: #fff;
+/*    height:100px;*/
+  }
   
-  <table class="voldata"  border="1" width="100%">
+  div.contentright .sblist{
+    margin-top: 20px;
+    border-radius:4px;
+    padding: 20px;
+    background-color: #fff;
+    height: 500px;
+  }
+
+    
+</style>
+  
+<div class="row">
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 contentleft">  
+    
+
+      
+  <table class="table table-hover" >
     
     <tr>
       <th style="width:50px">序号</th>
-      <th style="width:100px">设备</th>
-      <th style="width:100px">温度</th>
-      <th style="width:300px">接收数据</th>
-      <th style="width:300px">接收时间</th>
+      <th style="width:80px">站码</th>
+      <th style="width:100px">站名</th>
+      <th style="width:100px">接收时间</th>
+      <th style="width:80px">上升水位</th>
+      <th style="width:80px">实际水位</th>
+      
     </tr>
     
     
@@ -28,21 +71,39 @@
       <tr>
         <td><%=(i+1) + (curpage -1) * 20 %></td>
         <td><%=rows[i].ZCODE%></td>
+        <td></td>
+        <td> <%=rows[i].myd %> </td>
         <td><%=rows[i].ZVOL%></td>
         <td><%=rows[i].ZSTR%></td>
-        <td> <%=rows[i].myd %> </td>
+        
       </tr>
-    <%}%>
     
+  <%}%>  
     
   </table>
   
-  <div class="pagebar"> 
+  <div class="pagebar"> </div>
+  
+  
+</div>
+
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 contentright">
+  <div class="logininfo">
+    <div class="title">登录名:<%=loginname%></div> 
     
   </div>
   
+  <div class="sblist">
+    
+    
+  </div>
   
-  </div> <!-- content -->
+
+</div>  
+</div>  
+  
+ 
+
 
 <script src="/pagebar.js" type="application/javascript"></script>
 <script>
@@ -50,7 +111,6 @@
     
     $('div.pagebar').pagebar(<%=rowcount%>,<%=curpage%>,'/index?page=$$');
     
-
     
   });
           

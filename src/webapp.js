@@ -9,11 +9,12 @@ var url = require("url");
 var path = require('path');
 var ejs = require('ejs');
 var qs = require('querystring');
-
+var getRawBody = require('raw-body');
+var sysconfig = require('./config.js');
 
 var config = {
-  port: 8081,
   //index:'',
+  port:8081,
   srcdir:'./webcontrollers',
   html:'./webcontent',
   staticdir:'./webcontent/public'     //静态文件目录
@@ -54,6 +55,21 @@ var staticResHandler=  function (localPath, ext, res) {
   });
 };
 
+//取出session的值。
+var session = function(req, res){
+  
+  if( req.headers.cookie ){
+    req.session = qs.parse(req.headers.cookie,';');
+    req.session.sid = 22;
+    if(req.session.sid){
+      req.session.login = true;
+    }
+  }
+  else{
+    req.session = {};  
+  }
+};
+
 //创建服务
 http.createServer(function(req,res,next){
   var pathname = url.parse(req.url).pathname;
@@ -87,8 +103,10 @@ http.createServer(function(req,res,next){
         staticResHandler(localPath, ext, res); //静态资源
       } else {
         try {
+          session(req,res); //session 处理。
+          if(!req.session.loginname){localPath= config.srcdir + '/login.js';}
           var handler = require(localPath);
-          if (handler.processRequest && typeof handler.processRequest === 'function') {
+          if (handler) {
               
               res.loadview = function(filename,data){
                 var localfilename = path.resolve(__dirname,config.html + '/' + filename);
@@ -99,9 +117,41 @@ http.createServer(function(req,res,next){
                   {filename:localfilename})
                 );
               };
+              
               var getQuery = url.parse(req.url).query;
               getQuery?req.query = qs.parse(getQuery):req.query={};
-              handler.processRequest(req,res); //动态资源
+            
+              //get,post处理
+              if(req.method == 'GET' && handler.get && typeof handler.get === 'function' ){
+                handler.get(req,res);  
+              }
+              else if(req.method == 'POST' && handler.post && typeof handler.post === 'function'){
+                
+                getRawBody(req,{
+                  length: req.headers['content-length'],
+                  limit: '1mb',
+                  encoding: 'utf-8' 
+                }, function (err, bodystr) {
+                  if (!err) {
+                    try{
+                      req.body = qs.parse(bodystr); 
+                      handler.post(req,res);
+                    }catch(e){
+                      req.body = {};  
+                      handler.post(req,res);
+                    };
+                  }
+                  else{
+                    req.body ={};
+                    handler.post(req,res);
+                  }
+                });
+              }
+              else{
+                res.writeHead(404, {'Content-Type': 'text/plain'});
+                res.end('404:路由出错');  
+              };
+              
             
           } else {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -121,7 +171,7 @@ http.createServer(function(req,res,next){
     
   });
    
-}).listen(config.port);
+}).listen(config.port,function(){console.log('web服务已启动,窗口关闭则服务无效。:'+config.port)});
 
 
 

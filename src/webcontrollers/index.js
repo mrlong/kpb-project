@@ -4,7 +4,9 @@ var Db = require('../db.js');
 
 //var querystring=require('querystring');
 
-exports.processRequest = function (req, res) {
+var mod ={};
+
+mod.get = function (req, res) {
   
   var page = req.query.page || 1;
   
@@ -24,15 +26,18 @@ exports.processRequest = function (req, res) {
       res.loadview('index.html',{
         rows:!err&&rows?rows:[],
         curpage:page,
+        loginname :req.session.loginname,
         rowcount:!err2 && rows2 ? rows2[0].myc:0
       });  
     });  
     
     
   });
-
+  
   
   
 
   
 };
+
+module.exports=mod;
