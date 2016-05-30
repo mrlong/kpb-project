@@ -44,6 +44,10 @@
     background-color: #fff;
     height: 500px;
   }
+  
+  div.contentright .sblist li{
+    padding: 4px;
+  }
 
     
 </style>
@@ -71,10 +75,10 @@
       <tr>
         <td><%=(i+1) + (curpage -1) * 20 %></td>
         <td><%=rows[i].ZCODE%></td>
-        <td></td>
+        <td><%=rows[i].NAME%></td>
         <td> <%=rows[i].myd %> </td>
         <td><%=rows[i].ZVOL%></td>
-        <td><%=rows[i].ZSTR%></td>
+        <td><%= parseFloat(rows[i].ZVOL) + parseFloat(rows[i].bv) %></td>
         
       </tr>
     
@@ -94,7 +98,13 @@
   </div>
   
   <div class="sblist">
-    
+    <ul class="list-unstyled">
+      <li><a href="/index">全部</a></li>
+      <% for(var i=0;i<sblist.length;i++) {%>
+        <li><a href="/index?zcode=<%=sblist[i].STCD%>"><%=sblist[i].STCD%> <%=sblist[i].NAME%></a></li>
+      <%}%>
+      
+    </ul>
     
   </div>
   
@@ -111,6 +121,19 @@
     
     $('div.pagebar').pagebar(<%=rowcount%>,<%=curpage%>,'/index?page=$$');
     
+    $('div.sblist li span[zcode]').each(function(idx,item){
+      var zcode = $(item).attr('zcode');
+      var that = item;
+      $.get('/sb',{zcode:zcode},function(data,status){
+        if(data && status == 'success'){
+          var sb = JSON.parse(data);
+          $(that).html('<b>'+ zcode +'</b>' + sb.name);
+        } 
+        else{
+          
+        }
+      });
+    });
     
   });
           

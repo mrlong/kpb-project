@@ -11,6 +11,7 @@ var ejs = require('ejs');
 var qs = require('querystring');
 var getRawBody = require('raw-body');
 var sysconfig = require('./config.js');
+var session = require('./session.js');
 
 var config = {
   //index:'',
@@ -55,20 +56,6 @@ var staticResHandler=  function (localPath, ext, res) {
   });
 };
 
-//取出session的值。
-var session = function(req, res){
-  
-  if( req.headers.cookie ){
-    req.session = qs.parse(req.headers.cookie,';');
-    req.session.sid = 22;
-    if(req.session.sid){
-      req.session.login = true;
-    }
-  }
-  else{
-    req.session = {};  
-  }
-};
 
 //创建服务
 http.createServer(function(req,res,next){
@@ -103,7 +90,7 @@ http.createServer(function(req,res,next){
         staticResHandler(localPath, ext, res); //静态资源
       } else {
         try {
-          session(req,res); //session 处理。
+          req.session = session.start(req, res);
           if(!req.session.loginname){localPath= config.srcdir + '/login.js';}
           var handler = require(localPath);
           if (handler) {
@@ -126,7 +113,6 @@ http.createServer(function(req,res,next){
                 handler.get(req,res);  
               }
               else if(req.method == 'POST' && handler.post && typeof handler.post === 'function'){
-                
                 getRawBody(req,{
                   length: req.headers['content-length'],
                   limit: '1mb',

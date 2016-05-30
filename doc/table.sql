@@ -23,3 +23,18 @@ create table TB_SB_REQ(
  	constraint TB_SB_REQ_PK primary key(ZID) 
  ) 
  go 
+ 
+ 
+ create table TB_USER( 
+ 	ZID	int IDENTITY (1, 1) not null,   /*ID并自动产生编号*/ 
+ 	ZNAME   varchar(50)  not null ,     /*登录名*/ 
+ 	ZPASSWD	varchar(50) not null,       /*密码*/ 
+ 	ZSBLIST	varchar(200)                /*设备列表，以,号分开*/ 
+  
+
+
+ 	constraint PK_TB_USER primary key(ZID) 
+ ) 
+ go 
+ 
+ 

@@ -49,11 +49,13 @@ exports.writeREQ = function(sbcode,datastr,log){
       };
       
       var myvol = parseFloat(vals[1]).toFixed(3);
+      //xs,#1001
+      var mycode = sbcode.replace('xs,#','');
       
       var sqltxt = "insert into TB_SB_REQ(ZCODE,ZVOL,ZSTR,ZDATE) values('" + 
-              sbcode +"'," +
+              mycode +"'," +
               myvol + ",'" +
-              datastr + "',GETDATE())";
+              sbcode + ' ' + datastr + "',GETDATE())";
       
       var transaction = new mssql.Transaction(connection);
       transaction.begin(function(err) {
