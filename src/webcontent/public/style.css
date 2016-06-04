@@ -9,7 +9,7 @@ body{
 /*分页*/
 div.pagebar{
   color: blueviolet;
-  padding: 20px 10px 20px 10px;
+/*  padding: 20px 10px 20px 10px;*/
 }
 
 div.pagebar a{

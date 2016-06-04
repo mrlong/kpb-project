@@ -12,6 +12,9 @@ mod.get = function (req, res) {
   var loginname = req.session.loginname; //登录名
   var sblist = req.session.sbs.split(','); //以 , 号分开
   var zcode = req.query.zcode;
+
+  var mydate = req.query.date || (new Date().getFullYear() + '-' + (new Date().getMonth()+1 ) + '-' + new Date().getDate());
+  
   
   var mywhere2 = '(1=2';
   var mywhere = '(1=2';
@@ -27,6 +30,11 @@ mod.get = function (req, res) {
     mywhere += " and ZCODE='" + zcode + "'";
   };
   
+  mywhere  += " and datediff(day,a.ZDATE,'" + mydate +"')=0";
+//  mywhere2 += " and datediff(day,a.ZDATE,'" + mydate +"')=0";
+  
+  
+  
   
   var mysqltxt;
   if(page==1){
@@ -41,16 +49,25 @@ mod.get = function (req, res) {
   
   Db.query(mysqltxt,function(err,rows){
   
-    Db.query('select count(*) as myc from TB_SB_REQ where' + mywhere ,function(err2,rows2){
+    Db.query('select count(*) as myc from TB_SB_REQ as a  where' + mywhere ,function(err2,rows2){
       
       Db.query('select * from NAME where ' + mywhere2,function(err3,rows3){
-      
+        
+        
+        //计算当前日期的前一天与后一天
+        var curdate  = new Date(mydate + ' 12:00');
+        var preDate  = new Date(curdate - 24*60*60*1000);  //前一天
+        var nextDate = new Date(curdate + 24*60*60*1000*1.2);  //后一天
+        var preDateStr = preDate.getFullYear() + '-' + (preDate.getMonth()+1 ) + '-' + preDate.getDate();
+        var nextDateStr = nextDate.getFullYear() + '-' + (nextDate.getMonth()+1 ) + '-' + nextDate.getDate();
       
         res.loadview('index.html',{
           rows:!err&&rows?rows:[],
           curpage:page,
           loginname :req.session.loginname,
           rowcount:!err2 && rows2 ? rows2[0].myc:0,
+          zcode:zcode,
+          curdate:mydate,predate:preDateStr,nextdate:nextDateStr,
           sblist:!err3 && rows3 ? rows3 :[]
 
         });
@@ -60,6 +77,17 @@ mod.get = function (req, res) {
     
     
   });
+  
+  
+//  res.loadview('index.html',{
+//          rows:[],
+//          curpage:1,
+//          zcode:'',  
+//          loginname :'mrlong',
+//          rowcount:0,
+//          sblist:[]
+//
+//        });
   
   
   
