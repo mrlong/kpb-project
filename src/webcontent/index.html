@@ -165,7 +165,7 @@
 <script>
   $(document).ready(function(){
     
-    $('div.pagebar').pagebar(<%=rowcount%>,<%=curpage%>,'/index?page=$$&date=<%=curdate%>');
+    $('div.pagebar').pagebar(<%=rowcount%>,<%=curpage%>,"/index?page=$$&date=<%=curdate%><%-zcode ? '&zcode=' + zcode : '' %>");
     
     $('.sbdatepicker,.icon-th').datepicker({
       language: "zh-CN",

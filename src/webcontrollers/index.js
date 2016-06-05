@@ -42,7 +42,7 @@ mod.get = function (req, res) {
   }
   else{
     mysqltxt = 'select TOP 20 ZCODE,ZSTR,ZVOL,ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.NAME,ISNULL(b.BASE,0) as bv  from TB_SB_REQ as a left join NAME as b on (a.ZCODE=b.STCD) where ZID not in(' + 
-              'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by ZDATE desc ';
+              'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by a.ZDATE desc ';
   };
   
   
