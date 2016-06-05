@@ -90,9 +90,9 @@
   <div class="panel-body">
     <nav>
       <ul class="pager">
-        <li class="previous"><a href="/index?date=<%=predate%><%=zcode?'&zcode=' + zcode : '' %>"><span aria-hidden="true">&larr;</span> 上一天</a></li>
+        <li class="previous"><a href="/index?date=<%=predate%><%=zcode?'&zcode=' + zcode : '' %>"><span aria-hidden="true">&larr;</span> 前一天</a></li>
         <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm" >当前日期 <span class="curdate"><%=curdate%></span> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>选择</a></li>        
-        <li class="next"><a href="/index?date=<%=nextdate%><%=zcode?'&zcode=' + zcode : '' %>">下一天 <span aria-hidden="true">&rarr;</span></a></li>
+        <li class="next"><a href="/index?date=<%=nextdate%><%=zcode?'&zcode=' + zcode : '' %>">后一天 <span aria-hidden="true">&rarr;</span></a></li>
       </ul>
     </nav>
    
@@ -103,7 +103,7 @@
       <th style="width:80px">站码</th>
       <th style="width:100px">站名</th>
       <th style="width:100px">接收时间</th>
-      <th style="width:80px">上升水位</th>
+      <th style="width:80px">上传水位</th>
       <th style="width:80px">实际水位</th>
       
     </tr>
@@ -149,7 +149,7 @@
     
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" style="width:100px">确定</button>
+        <button type="button" class="btn btn-primary" id="enterdate" style="width:100px">确定</button>
       </div>
       
     </div>
@@ -165,7 +165,7 @@
 <script>
   $(document).ready(function(){
     
-    $('div.pagebar').pagebar(<%=rowcount%>,<%=curpage%>,'/index?page=$$');
+    $('div.pagebar').pagebar(<%=rowcount%>,<%=curpage%>,'/index?page=$$&date=<%=curdate%>');
     
     $('.sbdatepicker,.icon-th').datepicker({
       language: "zh-CN",
@@ -179,7 +179,15 @@
       todayHighlight: true,
       language: "zh-CN",
       todayHighlight: true
-      //defaultViewDate: { year: 1977, month: 04, day: 25 }
+      //defaultViewDate: { year:<%=curdate.split('-')[0]%>, month:<%=parseInt(curdate.split('-')[1])-1%>, day:<%=curdate.split('-')[2]%> }
+    }).on('changeDate',function(e){
+      $('#enterdate').attr('changedate',e.date.getFullYear() + '-' + (e.date.getMonth()+1) + '-' + e.date.getDate());
+    });
+    
+    $('#enterdate').on('click',function(){
+      $('.bs-example-modal-sm').modal('hide');
+      var mydate = $('div.modal-content .modal-body').datepicker('getdate');
+      location.href = '/index?date=' + $(this).attr('changedate') + "<%- zcode ? '&zcode=' + zcode : ''%>";
     });
     
     

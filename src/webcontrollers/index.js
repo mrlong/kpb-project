@@ -57,7 +57,7 @@ mod.get = function (req, res) {
         //计算当前日期的前一天与后一天
         var curdate  = new Date(mydate + ' 12:00');
         var preDate  = new Date(curdate - 24*60*60*1000);  //前一天
-        var nextDate = new Date(curdate + 24*60*60*1000*1.2);  //后一天
+        var nextDate  = new Date( curdate.setDate(curdate.getDate()+1) );  // new Date(curdate + 24*60*60*1000);  //后一天
         var preDateStr = preDate.getFullYear() + '-' + (preDate.getMonth()+1 ) + '-' + preDate.getDate();
         var nextDateStr = nextDate.getFullYear() + '-' + (nextDate.getMonth()+1 ) + '-' + nextDate.getDate();
       
