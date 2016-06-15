@@ -41,7 +41,13 @@ exports.writeREQ = function(sbcode,datastr,log){
   var connection = new mssql.Connection(config.mssql);
   connection.connect(function(err) {
     if(!err){
+      
       var vals = datastr.split('+');
+      //有可能是 *33-00.00132 的格式。2016-6-15
+      if(vals.length !=2){
+        var vals = datastr.split('-');    
+      };
+      
       if(vals.length != 2){
         log && log.error('客户端返回参数出错! ' + datastr);
         connection.close();
