@@ -1,3 +1,10 @@
 /src/node_modules/
 /src/logs/
 /src/config.js
+src/webcontent/public/bootstrap/.DS_Store
+src/webcontent/.DS_Store
+src/webcontent/public/.DS_Store
+src/webcontent/public/bootstrap-datepicker/.DS_Store
+src/.DS_Store
+.DS_Store
+doc/.DS_Store
