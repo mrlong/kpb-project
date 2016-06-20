@@ -27,8 +27,13 @@ module.exports = function(log){
           //客户的心跳  
         }
         else{
-          Db.writeREQ(c.sbcode,mystr,log); //写库入 
           log.info('other:' + mystr);
+          if(c.sbcode){
+             Db.writeREQ(c.sbcode,mystr,log); //写库入 
+           }
+           else{
+             log.error('收到的信息无法确定是哪台站点的。');
+           }
         };
      }
     }); 
