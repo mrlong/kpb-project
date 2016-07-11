@@ -111,12 +111,18 @@
     
     <% for(var i=0;i < rows.length ; i++) { %>
       
-      <tr>
+      <tr class="<%=rows[i].ZVOL>0.05? 'text-danger':'' %> ">
         <td><%=(i+1) + (curpage -1) * 20 %></td>
         <td><%=rows[i].ZCODE%></td>
         <td><%=rows[i].NAME%></td>
         <td> <%=rows[i].myd %> </td>
-        <td><%=rows[i].ZVOL%></td>
+        <td>
+          <% if(rows[i].ZVOL>0.05) { %>
+            <span class="label label-danger"><%=rows[i].ZVOL%></span>
+          <%} else {%>
+            <%=rows[i].ZVOL%>  
+          <%}%>
+        </td>
         <td><%= parseFloat(rows[i].ZVOL) + parseFloat(rows[i].bv) %></td>
         
       </tr>
