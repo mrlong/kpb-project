@@ -36,6 +36,16 @@ create table TB_SB_REQ(
  go 
 
 
+
+ create table TB_NAME2( 
+ 	ZCODE   varchar(50)  not null ,     /*登录名*/ 
+ 	ZNAME	varchar(50) not null,       /*密码*/ 
+ 	ZBASE	varchar(200)            
+
+ 	constraint PK_TB_USER primary key(ZID) 
+ ) 
+ go 
+
  /*新的扩展版本*/
  create table TB_SB_REQ2( 
  	ZID	int IDENTITY (1, 1) not null,   /*ID并自动产生编号*/ 

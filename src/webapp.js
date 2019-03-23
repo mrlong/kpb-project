@@ -15,9 +15,9 @@ var session = require('./session.js');
 
 var config = {
   //index:'',
-  port:8081,
-  srcdir:'./webcontrollers',
-  html:'./webcontent',
+  port:8082,
+  srcdir: __dirname + '/webcontrollers',
+  html: __dirname + '/webcontent',
   staticdir:'./webcontent/public'     //静态文件目录
 };
 

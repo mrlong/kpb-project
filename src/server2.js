@@ -14,36 +14,34 @@ module.exports = function(log){
   var server = net.createServer(function(c) {
     
     c.on('data',function(chunk){
-     console.log('length='+chunk.length);
-     var mystr = chunk.toString();
-	 //console.log(chunk);
-	 //var mystr2 = new Buffer(chunk,"utf-8").toString('hex');
-	 //console.log(mystr2);
-
-     
-	 console.log(chunk.slice(0, 4).toString());
+      //console.log('length='+chunk.length);
+      //var mystr = chunk.toString();
+	    //console.log(chunk);
+	    //var mystr2 = new Buffer(chunk,"utf-8").toString('hex');
+	    //console.log(mystr2);
+      //console.log(chunk.slice(0, 4).toString());
 
      //重新建立连接。      
      if(chunk.slice(0, 2).toString()=='st'){
-        c.sbcode = chunk.slice(3, 8).toString(); 
+        c.sbcode = chunk.slice(4, 8).toString(); 
         //c.write(new Buffer('24303052503033320D','hex'));
         //c.pipe(c);
-        //log.info('first connected:' + mystr);
-		console.log('first connected:' + c.sbcode);
+        log.info('first connected:' + c.sbcode);
+		    //console.log('first connected:' + c.sbcode);
      }
      else{
         if(chunk.slice(0, 1).toString() == '$'){
           //客户的心跳  
-		  console.log('heart');
+          log.info(c.sbcode + 'heart');
         }
         else{
-          if(c.sbcode){
-             console.log('data=' + mystr);
-			 Db.writeREQ2(c.sbcode,chunk,log); //写库入 
-           }
-           else{
-             log.error('收到的信息无法确定是哪台站点的。');
-           }
+            if(c.sbcode){
+              //console.log('data=' + mystr);
+			        Db.writeREQ2(c.sbcode,chunk,log); //写库入 
+            }
+            else{
+              log.error('收到的信息无法确定是哪台站点的。');
+            }
         };
      }
     }); 

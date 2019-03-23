@@ -57,9 +57,8 @@
   <div class="panel-body">
     <div id="sandbox-container"></div>
     <ul class="list-unstyled">
-      <li class="<%=zcode?'':'active'%>"><a href="/index?date=<%=curdate%>" >全部</a></li>
       <% for(var i=0;i<sblist.length;i++) {%>
-        <li class="<%=zcode==sblist[i].STCD?'active':''%>" ><a href="/index?zcode=<%=sblist[i].STCD%>&date=<%=curdate%>"><%=sblist[i].STCD%> <%=sblist[i].NAME%></a></li>
+        <li class="<%=zcode==sblist[i].ZSTCD?'active':''%>" ><a href="/index?zcode=<%=sblist[i].ZSTCD%>&date=<%=curdate%>"><%=sblist[i].ZSTCD%> <%=sblist[i].ZNAME%></a></li>
       <%}%>
     </ul>
   </div>
@@ -79,7 +78,7 @@
       全部 <%=curdate%>
     <%} else {%>
       <% for(var i=0;i<sblist.length;i++) {%> 
-        <% if(sblist[i].STCD == zcode) {%>
+        <% if(sblist[i].ZSTCD == zcode) {%>
           <%=sblist[i].NAME%> <%=curdate%>
           <%break;%>
         <%}%> 
@@ -100,31 +99,26 @@
     
     <tr>
       <th style="width:50px">序号</th>
-      <th style="width:80px">站码</th>
-      <th style="width:100px">站名</th>
-      <th style="width:100px">接收时间</th>
-      <th style="width:80px">上传水位</th>
-      <th style="width:80px">实际水位</th>
-      
+      <th style="width:100px">采集时间</th>
+      <th style="width:80px">水位</th>
+      <th style="width:80px">指标流速</th>
+      <th style="width:80px">平均流速</th>
+      <th style="width:80px">断面面积</th>
+      <th style="width:80px">流量</th>
     </tr>
     
     
     <% for(var i=0;i < rows.length ; i++) { %>
       
-      <tr class="<%=rows[i].ZVOL>0.05? 'text-danger':'' %> ">
+      <tr class="">
         <td><%=(i+1) + (curpage -1) * 20 %></td>
-        <td><%=rows[i].ZCODE%></td>
-        <td><%=rows[i].NAME%></td>
-        <td> <%=rows[i].myd %> </td>
-        <td>
-          <% if(rows[i].ZVOL>0.05) { %>
-            <span class="label label-danger"><%=rows[i].ZVOL%></span>
-          <%} else {%>
-            <%=rows[i].ZVOL%>  
-          <%}%>
-        </td>
-        <td><%= parseFloat(rows[i].ZVOL) + parseFloat(rows[i].bv) %></td>
-        
+        <td><%=rows[i].Z1 + '-' + rows[i].Z2 + '-' + rows[i].Z3 + ' ' + rows[i].Z4 + ':' + rows[i].Z5  %></td>
+        <td><%=rows[i].Z9%></td>
+        <td><%=rows[i].Z7/100%></td> 
+        <td><%=rows[i].Z32/rows[i].Z33/100%></td>  
+        <td><%=rows[i].Z33%></td>
+        <td><%=rows[i].Z32%></td>
+       
       </tr>
     
   <%}%>  

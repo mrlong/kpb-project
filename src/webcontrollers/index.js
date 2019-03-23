@@ -20,7 +20,7 @@ mod.get = function (req, res) {
   var mywhere = '(1=2';
   for(var i=0;i<sblist.length;i++){
     mywhere += " or ZCODE='" + sblist[i] + "'";
-    mywhere2 += " or STCD='" + sblist[i] + "'";
+    mywhere2 += " or ZSTCD='" + sblist[i] + "'";
   };
   
   mywhere += ')';
@@ -38,20 +38,20 @@ mod.get = function (req, res) {
   
   var mysqltxt;
   if(page==1){
-    mysqltxt = 'select top 20 ZCODE,ZSTR,ZVOL,ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.NAME,ISNULL(b.BASE,0) as bv from TB_SB_REQ as a left join NAME as b on (a.ZCODE=b.STCD) where ' + mywhere +' order by ZDATE desc ';
+    mysqltxt = 'select top 20 ZCODE,Z1,Z2,Z3,Z4,Z5,Z6,Z9,Z7,Z33,Z32, ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ' + mywhere +' order by ZDATE desc ';
   }
   else{
-    mysqltxt = 'select TOP 20 ZCODE,ZSTR,ZVOL,ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.NAME,ISNULL(b.BASE,0) as bv  from TB_SB_REQ as a left join NAME as b on (a.ZCODE=b.STCD) where ZID not in(' + 
-              'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by a.ZDATE desc ';
+    mysqltxt = 'select TOP 20 ZCODE,Z1,Z2,Z3,Z4,Z5,Z6,Z9,Z7,Z33,Z32,ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv  from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ZID not in(' + 
+              'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ2 where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by a.ZDATE desc ';
   };
   
   
   
   Db.query(mysqltxt,function(err,rows){
   
-    Db.query('select count(*) as myc from TB_SB_REQ as a  where' + mywhere ,function(err2,rows2){
+    Db.query('select count(*) as myc from TB_SB_REQ2 as a  where' + mywhere ,function(err2,rows2){
       
-      Db.query('select * from NAME where ' + mywhere2,function(err3,rows3){
+      Db.query('select * from TB_NAME2 where ' + mywhere2,function(err3,rows3){
         
         
         //计算当前日期的前一天与后一天

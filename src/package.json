@@ -7,6 +7,7 @@
     "ejs": "^2.4.1",
     "log4js": "^0.6.36",
     "mssql": "^3.3.0",
+    "mysql": "^2.16.0",
     "raw-body": "^2.1.6"
   },
   "devDependencies": {},
