@@ -9,7 +9,7 @@ var log4js = require('log4js');
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length; //cpu核数
 var config = require('./config.js');
-var server = require('./server.js');
+var server = require('./server2.js');
 
 
 log4js.configure(config.logger);
