@@ -37,7 +37,13 @@ module.exports = function(log){
         else{
             if(c.sbcode){
               //console.log('data=' + mystr);
-			        Db.writeREQ2(c.sbcode,chunk,log); //写库入 
+              if (chunk.slice(0, 2).toString()=='20')
+              {			 
+                Db.writeREQ2(c.sbcode,chunk,log); //写库入 
+              }
+              else{
+                log.info(chunk.toString('hex'));
+              }
             }
             else{
               log.error('收到的信息无法确定是哪台站点的。');

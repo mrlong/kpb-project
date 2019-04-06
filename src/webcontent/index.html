@@ -45,6 +45,10 @@
     padding-right: 5px;
   }
 
+  tr.datavalue td{
+    font-weight:bold;
+  }
+
     
 </style>
   
@@ -105,6 +109,7 @@
       <th style="width:80px">平均流速(m/s)</th>
       <th style="width:80px">断面面积(m2)</th>
       <th style="width:80px">流量(m3/s)</th>
+      <th style="width:50px">明细</th>
     </tr>
     
     
@@ -118,6 +123,173 @@
         <td><%=rows[i].Z32/rows[i].Z33/100%></td>  
         <td><%=rows[i].Z33%></td>
         <td><%=rows[i].Z32%></td>
+        <td>
+          <a href="javascript:;" class="btn btn-primary willsign btn-xs btn-block" data-toggle="modal" data-target="#myModa<%=i%>"
+             style="margin-top:0px;margin-bottom:0px">明细</a>
+        
+          <!-- Modal -->
+          <div class="modal fade" id="myModa<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog  modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">明细内容</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-condensed table-bordered">
+                    <tr>
+                      <td>参数</td>
+                      <td>年</td>
+                      <td>月</td>
+                      <td>日</td>
+                      <td>时</td>
+                      <td>分</td>
+                      <td>秒</td>
+                      <td>Vx</td>
+                      <td>Vy</td>
+                      <td>水位</td>
+                      <td>流量</td>
+                      <td>断面面积</td>
+                    </tr>
+                    <tr>
+                      <td>单位</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>cm/s</td>
+                      <td>cm/s</td>
+                      <td>m</td>
+                      <td>m3/s</td>
+                      <td>m2</td>
+                    </tr>
+                    <tr class="datavalue">
+                      <td>数据</td>
+                      <td><%=rows[i].Z1%></td>
+                      <td><%=rows[i].Z2%></td>
+                      <td><%=rows[i].Z3%></td>
+                      <td><%=rows[i].Z4%></td>
+                      <td><%=rows[i].Z5%></td>
+                      <td><%=rows[i].Z6%></td>
+                      <td><%=rows[i].Z7%></td>
+                      <td><%=rows[i].Z8%></td>
+                      <td><%=rows[i].Z9%></td>
+                      <td><%=rows[i].Z32%></td>
+                      <td><%=rows[i].Z33%></td>
+                    </tr>
+                    
+                    <tr>
+                      <td>参数</td>
+                      <td>Vx标准误差</td>
+                      <td>Vy标准误差</td>
+                      <td>水位标准误差</td>
+                      <td>Vx信号强度</td>
+                      <td>Vy信号强度</td>
+                      <td>水位信号强度</td>
+                      <td>完好比率</td>
+                    </tr>
+                    <tr>
+                      <td>单位</td>
+                      <td>cm/s</td>
+                      <td>cm/s</td>
+                      <td>cm/s</td>
+                      <td>counts</td>
+                      <td>counts</td>
+                      <td>counts</td>
+                      <td>%</td>
+                    </tr>
+                    <tr class="datavalue">
+                      <td>数据</td>
+                      <td><%=rows[i].Z10%></td>
+                      <td><%=rows[i].Z11%></td>
+                      <td><%=rows[i].Z12%></td>
+                      <td><%=rows[i].Z13%></td>
+                      <td><%=rows[i].Z14%></td>
+                      <td><%=rows[i].Z15%></td>
+                      <td><%=rows[i].Z16%></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>参数</td>
+                        <td>艘向</td>
+                        <td>Pitch</td>
+                        <td>Roll</td>
+                        <td>艘向标准偏差</td>
+                        <td>Pitch标准偏差</td>
+                        <td>Roll标准偏差</td>
+                      </tr>
+                      <tr>
+                        <td>单位</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+
+                      <tr class="datavalue">
+                        <td>数据</td>
+                        <td><%=rows[i].Z17%></td>
+                        <td><%=rows[i].Z18%></td>
+                        <td><%=rows[i].Z19%></td>
+                        <td><%=rows[i].Z20%></td>
+                        <td><%=rows[i].Z21%></td>
+                        <td><%=rows[i].Z22%></td>
+                      </tr>
+
+
+                      <tr>
+                          <td>参数</td>
+                          <td>平均温度</td>
+                          <td>平均压力</td>
+                          <td>压力标准偏差</td>
+                          <td>电压</td>
+                          <td>采样开始位置</td>
+                          <td>采样结束位置</td>
+                          <td>波束1噪音</td>
+                          <td>波束2噪音</td>
+                          <td>波束3噪音</td>
+                        </tr>
+                        <tr>
+                          <td>单位</td>
+                          <td>℃</td>
+                          <td>dbar</td>
+                          <td>dbar</td>
+                          <td>V</td>
+                          <td>M</td>
+                          <td>M</td>
+                          <td>counts</td>
+                          <td>counts</td>
+                          <td>counts</td>
+                        </tr>
+                        
+                        <tr class="datavalue">
+                          <td>数据</td>
+                          <td><%=rows[i].Z23%></td>
+                          <td><%=rows[i].Z24%></td>
+                          <td><%=rows[i].Z25%></td>
+                          <td><%=rows[i].Z26%></td>
+                          <td><%=rows[i].Z27%></td>
+                          <td><%=rows[i].Z28%></td>
+                          <td><%=rows[i].Z29%></td>
+                          <td><%=rows[i].Z30%></td>
+                          <td><%=rows[i].Z31%></td>
+                        </tr>
+                        
+
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </td>
        
       </tr>
     
@@ -143,7 +315,7 @@
         <h4 class="modal-title" id="exampleModalLabel">选择日期</h4>
       </div>
       
-      <div class="modal-body" style="margin-left: 20px;">
+      <div class="modal-bodydate" style="margin-left: 20px;">
       
       </div>
     
@@ -174,7 +346,7 @@
     
     
     
-    $('div.modal-content .modal-body').datepicker({
+    $('div.modal-content .modal-bodydate').datepicker({
       forceParse: false,
       todayHighlight: true,
       language: "zh-CN",

@@ -38,10 +38,10 @@ mod.get = function (req, res) {
   
   var mysqltxt;
   if(page==1){
-    mysqltxt = 'select top 20 ZCODE,Z1,Z2,Z3,Z4,Z5,Z6,Z9,Z7,Z33,Z32, ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ' + mywhere +' order by ZDATE desc ';
+    mysqltxt = 'select top 20 ZCODE,Z1,Z2,Z3,Z4,Z5,Z6,Z8,Z9,Z7,Z10,Z11,Z12,Z13,Z14,Z15,Z16,Z17,Z18,Z19,Z20,Z21,Z22,Z23,Z24,Z25,Z26,Z27,Z28,Z29,Z30,Z31,Z32,Z33, ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ' + mywhere +' order by ZDATE desc ';
   }
   else{
-    mysqltxt = 'select TOP 20 ZCODE,Z1,Z2,Z3,Z4,Z5,Z6,Z9,Z7,Z33,Z32,ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv  from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ZID not in(' + 
+    mysqltxt = 'select TOP 20 ZCODE,Z1,Z2,Z3,Z4,Z5,Z6,Z8,Z9,Z7,Z10,Z11,Z12,Z13,Z14,Z15,Z16,Z17,Z18,Z19,Z20,Z21,Z22,Z23,Z24,Z25,Z26,Z27,Z28,Z29,Z30,Z31,Z32,Z33,ZDATE,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv  from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ZID not in(' + 
               'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ2 where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by a.ZDATE desc ';
   };
   

@@ -159,7 +159,8 @@ exports.writeREQ2 = function(sbcode,chunk,log){
 		      z21 + "," + z22 + "," + z23 + "," + z24 + "," + z25 + "," + z26 + "," + z27 + "," + z28 + "," + z29 + "," + z30 + "," + 
 		      z31 + "," + z32 + "," + z33 + "," + 
               "GETDATE())";
-      console.log(sqltxt);
+
+      //console.log(sqltxt);
       var transaction = new mssql.Transaction(connection);
       transaction.begin(function(err) {
         if(!err){

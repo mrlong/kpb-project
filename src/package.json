@@ -8,7 +8,8 @@
     "log4js": "^0.6.36",
     "mssql": "^3.3.0",
     "mysql": "^2.16.0",
-    "raw-body": "^2.1.6"
+    "raw-body": "^2.1.6",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {},
   "scripts": {
