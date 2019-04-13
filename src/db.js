@@ -143,21 +143,108 @@ exports.writeREQ2 = function(sbcode,chunk,log){
 	  var z30 = readfield(chunk,161,161+4);
 	  var z31 = readfield(chunk,165,165+4);
 	  var z32 = readfield(chunk,169,169+13);
-	  var z33 = readfield(chunk,182,182+13);
-	  
+    var z33 = readfield(chunk,182,182+13);
+    
+    var z40,z41,z42,z43,z44,z45,z46,z47,z48,z49,z50,z51,z52,z53,z54,z55,z56,z57,z58,z59,z60,
+        z61,z62,z63,z64,z65,z66,z67,z68,z69,z70,z71,z72,z73,z74,z75,z76,z77,z78,z79,z80,z81;
 
+    //层次数据 
+    //1
+    if (chunk.length >= (195 + 38 * 1)){
+      z40 = readfield(chunk,195,195+2);
+      z41 = readfield(chunk,197,197+8);
+      z42 = readfield(chunk,205,205+8);
+      z43 = readfield(chunk,213,213+6);
+      z44 = readfield(chunk,219,219+6);
+      z45 = readfield(chunk,225,225+4);
+      z46 = readfield(chunk,229,229+4);
+    };
+
+    //2
+    if (chunk.length >= (195 + 38 * 2)){
+      z47 = readfield(chunk,233,233+2);
+      z48 = readfield(chunk,235,235+8);
+      z49 = readfield(chunk,243,243+8);
+      z50 = readfield(chunk,251,251+6);
+      z51 = readfield(chunk,257,257+6);
+      z52 = readfield(chunk,263,263+4);
+      z53 = readfield(chunk,267,267+4);
+    };
+
+    //3
+    if (chunk.length >= (195 + 38 * 3)){
+      z54 = readfield(chunk,271,271+2);
+      z55 = readfield(chunk,273,273+8);
+      z56 = readfield(chunk,281,281+8);
+      z57 = readfield(chunk,289,289+6);
+      z58 = readfield(chunk,295,295+6);
+      z59 = readfield(chunk,301,301+4);
+      z60 = readfield(chunk,305,305+4);
+    };
+
+    //4
+    if (chunk.length >= (195 + 38 * 4)){
+      z61 = readfield(chunk,309,309+2);
+      z62 = readfield(chunk,311,311+8);
+      z63 = readfield(chunk,319,319+8);
+      z64 = readfield(chunk,327,327+6);
+      z65 = readfield(chunk,333,333+6);
+      z66 = readfield(chunk,339,339+4);
+      z67 = readfield(chunk,343,343+4);
+    };
+
+    //5
+    if (chunk.length >= (195 + 38 * 5)){
+      z68 = readfield(chunk,347,347+2);
+      z69 = readfield(chunk,349,349+8);
+      z70 = readfield(chunk,357,357+8);
+      z71 = readfield(chunk,365,365+6);
+      z72 = readfield(chunk,371,371+6);
+      z73 = readfield(chunk,377,377+4);
+      z74 = readfield(chunk,381,381+4);
+    };
+
+    //6
+    if (chunk.length >= (195 + 38 * 6)){
+      z75 = readfield(chunk,385,385+2);
+      z76 = readfield(chunk,387,387+8);
+      z77 = readfield(chunk,395,395+8);
+      z78 = readfield(chunk,403,403+6);
+      z79 = readfield(chunk,409,409+6);
+      z80 = readfield(chunk,415,415+4);
+      z81 = readfield(chunk,419,419+4);
+    };
+
+	
 	  console.log('z2=' + z2 + ';z3=' + z3);
 
       var sqltxt = "insert into TB_SB_REQ2(ZCODE,ZSTR," +
 		      "Z1,Z2,Z3,Z4,Z5,Z6,Z7,Z8,Z9,Z10,Z11,Z12,Z13,Z14,Z15,Z16,Z17,Z18,Z19,Z20,Z21,Z22,Z23,Z24,Z25,Z26," +
-			  "Z27,Z28,Z29,Z30,Z31,Z32,Z33" +
+        "Z27,Z28,Z29,Z30,Z31,Z32,Z33," +
+        "z40,z41,z42,z43,z44,z45,z46," +
+        "z47,z48,z49,z50,z51,z52,z53," +
+        "z54,z55,z56,z57,z58,z59,z60," +
+        "z61,z62,z63,z64,z65,z66,z67," +
+        "z68,z69,z70,z71,z72,z73,z74," +
+        "z75,z76,z77,z78,z79,z80,z81," +
+        
+        
 		      ",ZDATE) values('" + 
               sbcode +"','" +
               chunk.toString('hex') + "'," +
-			  z1 + "," + z2 + "," + z3 + "," + z4 + "," + z5 + "," + z6 + "," + z7 + "," + z8 + "," + z9 + "," + z10 + "," + 
-			  z11 + "," + z12 + "," + z13 + "," + z14 + "," + z15 + "," + z16 + "," + z17 + "," + z18 + "," + z19 + "," + z20 + "," + 
+			    z1 + "," + z2 + "," + z3 + "," + z4 + "," + z5 + "," + z6 + "," + z7 + "," + z8 + "," + z9 + "," + z10 + "," + 
+			    z11 + "," + z12 + "," + z13 + "," + z14 + "," + z15 + "," + z16 + "," + z17 + "," + z18 + "," + z19 + "," + z20 + "," + 
 		      z21 + "," + z22 + "," + z23 + "," + z24 + "," + z25 + "," + z26 + "," + z27 + "," + z28 + "," + z29 + "," + z30 + "," + 
-		      z31 + "," + z32 + "," + z33 + "," + 
+          z31 + "," + z32 + "," + z33 + "," + 
+          z40 + "," + z41 + "," + z42 + "," + z43 + "," + z44 + "," + z45 + "," + z46 + "," +
+          z47 + "," + z48 + "," + z49 + "," + z50 + "," + z51 + "," + z52 + "," + z53 + "," +
+          z54 + "," + z55 + "," + z56 + "," + z57 + "," + z58 + "," + z59 + "," + z60 + "," +
+          z61 + "," + z62 + "," + z63 + "," + z64 + "," + z65 + "," + z66 + "," + z67 + "," +
+          z68 + "," + z69 + "," + z70 + "," + z71 + "," + z72 + "," + z73 + "," + z74 + "," +
+          z75 + "," + z76 + "," + z77 + "," + z78 + "," + z79 + "," + z80 + "," + z81 + "," +
+
+          
+
               "GETDATE())";
 
       //console.log(sqltxt);

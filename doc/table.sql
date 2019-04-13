@@ -86,6 +86,55 @@ create table TB_SB_REQ(
 	Z32     float,  /*断面面积*/
 	Z33     float,
 
+	/*上面是层面数据共分6组*/
+	z40 float,  /*流层序号*/
+	z41 float,  /*Vx*/
+	z42 float,  /*Vy*/
+ 	z43 float,  /*Vx标准误差*/
+	z44 float,  /*Vy标准误差*/
+ 	z45 float,  /*Vx信号强度*/
+	z46 float,  /*Vy信号强度*/
+
+	z47 float,
+	z48 float,
+	z49 float,
+	z50 float,
+	z51 float,
+	z52 float,
+	z53 float,
+
+	z54 float,
+	z55 float,
+	z56 float,
+	z57 float,
+	z58 float,
+	z59 float,
+	z60 float,
+
+	z61 float,
+	z62 float,
+	z63 float,
+	z64 float,
+	z65 float,
+	z66 float,
+	z67 float,
+
+	z68 float,
+	z69 float,
+	z70 float,
+	z71 float,
+	z72 float,
+	z73 float,
+	z74 float,
+	z75 float,
+
+	z76 float,
+	z77 float,
+	z78 float,
+	z79 float,
+	z80 float,
+	z81 float,
+
 	ZDATE  datetime        /*操作系统时间*/
 
 
