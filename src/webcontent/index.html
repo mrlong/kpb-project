@@ -48,6 +48,10 @@
   tr.datavalue td{
     font-weight:bold;
   }
+  tr.title td{
+    background-color: #333;
+    color: #fff;
+  }
 
     
 </style>
@@ -117,7 +121,7 @@
       
       <tr class="">
         <td><%=(i+1) + (curpage -1) * 20 %></td>
-        <td><%=rows[i].Z1 + '-' + rows[i].Z2 + '-' + rows[i].Z3 + ' ' + (rows[i].Z4 < 10 ? ('0' + rows[i].Z4):rows[i].Z4 ) + ':' + rows[i].Z5  %></td>
+        <td><%=rows[i].Z1 + '-' + (rows[i].Z2 < 10 ? ('0' + rows[i].Z2):rows[i].Z2 ) + '-' + (rows[i].Z3 < 10 ? ('0' + rows[i].Z3):rows[i].Z3 ) + ' ' + (rows[i].Z4 < 10 ? ('0' + rows[i].Z4):rows[i].Z4 ) + ':' + (rows[i].Z5 < 10 ? ('0' + rows[i].Z5):rows[i].Z5 )  %></td>
         <td><%=rows[i].Z9%></td>
         <td><%=rows[i].Z7/100%></td> 
         <td><%=rows[i].Z32/rows[i].Z33/100%></td>  
@@ -136,9 +140,9 @@
                   <h4 class="modal-title">明细内容</h4>
                 </div>
                 <div class="modal-body">
-                   <label>时间： <%=rows[i].Z1%>年<%=rows[i].Z2%>月<%=rows[i].Z3%>日<%=rows[i].Z4<10?('0'+rows[i].Z4):rows[i].Z4 %>时<%=rows[i].Z5%>分<%=rows[i].Z6%>秒</label> 
+                   <label>时间： <%=rows[i].Z1%>年<%=rows[i].Z2<10?('0'+rows[i].Z2):rows[i].Z2%>月<%=rows[i].Z3<10?('0'+rows[i].Z3):rows[i].Z3 %>日<%=rows[i].Z4%>时<%=rows[i].Z5%>分<%=rows[i].Z6%>秒</label> 
                   <table class="table table-condensed table-bordered">
-                    <tr>
+                    <tr class="title">
                       <td>参数</td>
                       <td>Vx</td>
                       <td>Vy</td>
@@ -164,7 +168,7 @@
                       <td><%=rows[i].Z33%></td>
                     </tr>
                     
-                    <tr>
+                    <tr class="title">
                       <td>参数</td>
                       <td>Vx标准误差</td>
                       <td>Vy标准误差</td>
@@ -195,7 +199,7 @@
                       <td><%=rows[i].Z16%></td>
                     </tr>
                     
-                    <tr>
+                    <tr class="title">
                         <td>参数</td>
                         <td>艘向</td>
                         <td>Pitch</td>
@@ -225,7 +229,7 @@
                       </tr>
 
 
-                      <tr>
+                      <tr class="title">
                           <td>参数</td>
                           <td>平均温度</td>
                           <td>平均压力</td>
@@ -261,10 +265,89 @@
                           <td><%=rows[i].Z29%></td>
                           <td><%=rows[i].Z30%></td>
                           <td><%=rows[i].Z31%></td>
-                        </tr>
-                        
+                        </tr>                        
+
+
 
                   </table>
+
+
+                <table class="table table-condensed table-bordered">
+                <tr class="title">
+                  <td>流层序号</td>
+                  <td>Vx</td>
+                  <td>Vy</td>
+                  <td>Vx标准误差</td>
+                  <td>Vy标准误差</td>
+                  <td>Vx信号强度</td>
+                  <td>Vy信号强度</td>
+                </tr>
+
+                <tr >
+                    <td>1</td>
+                    <td><%=rows[i].Z41%></td>
+                    <td><%=rows[i].Z42%></td>
+                    <td><%=rows[i].Z43%></td>
+                    <td><%=rows[i].Z44%></td>
+                    <td><%=rows[i].Z45%></td>
+                    <td><%=rows[i].Z46%></td>
+                  </tr>
+
+                  <tr >
+                      <td>2</td>
+                      <td><%=rows[i].Z48%></td>
+                      <td><%=rows[i].Z49%></td>
+                      <td><%=rows[i].Z50%></td>
+                      <td><%=rows[i].Z51%></td>
+                      <td><%=rows[i].Z52%></td>
+                      <td><%=rows[i].Z53%></td>
+                    </tr>
+
+                <tr >
+                    <td>3</td>
+                    <td><%=rows[i].Z55%></td>
+                    <td><%=rows[i].Z56%></td>
+                    <td><%=rows[i].Z57%></td>
+                    <td><%=rows[i].Z58%></td>
+                    <td><%=rows[i].Z59%></td>
+                    <td><%=rows[i].Z60%></td>
+                  </tr>
+
+                  <tr >
+                      <td>4</td>
+                      <td><%=rows[i].Z62%></td>
+                      <td><%=rows[i].Z63%></td>
+                      <td><%=rows[i].Z64%></td>
+                      <td><%=rows[i].Z65%></td>
+                      <td><%=rows[i].Z66%></td>
+                      <td><%=rows[i].Z67%></td>
+                    </tr>
+
+                  <tr >
+                      <td>5</td>
+                      <td><%=rows[i].Z69%></td>
+                      <td><%=rows[i].Z70%></td>
+                      <td><%=rows[i].Z71%></td>
+                      <td><%=rows[i].Z72%></td>
+                      <td><%=rows[i].Z73%></td>
+                      <td><%=rows[i].Z74%></td>
+                    </tr>
+
+                    <tr >
+                        <td>6</td>
+                        <td><%=rows[i].Z76%></td>
+                        <td><%=rows[i].Z77%></td>
+                        <td><%=rows[i].Z78%></td>
+                        <td><%=rows[i].Z79%></td>
+                        <td><%=rows[i].Z80%></td>
+                        <td><%=rows[i].Z81%></td>
+                      </tr>
+
+
+    
+
+              </table>
+
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
