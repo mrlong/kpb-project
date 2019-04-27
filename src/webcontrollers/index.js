@@ -16,21 +16,21 @@ mod.get = function (req, res) {
   var mydate = req.query.date || (new Date().getFullYear() + '-' + (new Date().getMonth()+1 ) + '-' + new Date().getDate());
   
   
-  var mywhere2 = '(1=2';
-  var mywhere = '(1=2';
-  for(var i=0;i<sblist.length;i++){
-    mywhere += " or ZCODE='" + sblist[i] + "'";
-    mywhere2 += " or ZSTCD='" + sblist[i] + "'";
-  };
+  var mywhere2 = '(1=1';
+  var mywhere = '(1=1';
+  //for(var i=0;i<sblist.length;i++){
+  //  mywhere += " or ZCODE='" + sblist[i] + "'";
+  //  mywhere2 += " or ZSTCD='" + sblist[i] + "'";
+  //};
   
   mywhere += ')';
   mywhere2 += ')';
   
-  if(zcode){
-    mywhere += " and ZCODE='" + zcode + "'";
-  };
+  //if(zcode){
+  //  mywhere += " and ZCODE='" + zcode + "'";
+  //};
   
-  mywhere  += " and datediff(day,a.ZDATE,'" + mydate +"')=0";
+  mywhere  += " and datediff(day,ZDATE,'" + mydate +"')=0";
 //  mywhere2 += " and datediff(day,a.ZDATE,'" + mydate +"')=0";
   
   
@@ -38,11 +38,11 @@ mod.get = function (req, res) {
   
   var mysqltxt;
   if(page==1){
-    mysqltxt = 'select top 20 *,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ' + mywhere +' order by ZDATE desc ';
+    mysqltxt = 'select top 20 *,CONVERT(varchar(100), ZDATE, 20) as myd from TB_SB_REQ2  where ' + mywhere +' order by ZDATE desc ';
   }
   else{
-    mysqltxt = 'select TOP ' + 20 * page  +' *,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv  from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ZID not in(' + 
-              'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD)  where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by a.ZDATE desc ';
+    mysqltxt = 'select TOP ' + 20 * page  +' *,CONVERT(varchar(100), ZDATE, 20) as myd from TB_SB_REQ2  where ZID not in(' + 
+              'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ2  where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by ZDATE desc ';
   };
   
   
