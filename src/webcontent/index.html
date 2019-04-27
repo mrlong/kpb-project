@@ -123,8 +123,8 @@
         <td><%=(i+1) + (curpage -1) * 20 %></td>
         <td><%=rows[i].Z1 + '-' + (rows[i].Z2 < 10 ? ('0' + rows[i].Z2):rows[i].Z2 ) + '-' + (rows[i].Z3 < 10 ? ('0' + rows[i].Z3):rows[i].Z3 ) + ' ' + (rows[i].Z4 < 10 ? ('0' + rows[i].Z4):rows[i].Z4 ) + ':' + (rows[i].Z5 < 10 ? ('0' + rows[i].Z5):rows[i].Z5 )  %></td>
         <td><%=rows[i].Z9%></td>
-        <td><%=rows[i].Z7/100%></td> 
-        <td><%=rows[i].Z32/rows[i].Z33/100%></td>  
+        <td><%=(rows[i].Z7/100).toFixed(3)%></td> 
+        <td><%=(rows[i].Z32/rows[i].Z33).toFixed(3)%></td>  
         <td><%=rows[i].Z33%></td>
         <td><%=rows[i].Z32%></td>
         <td>

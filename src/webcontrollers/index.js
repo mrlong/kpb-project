@@ -41,8 +41,8 @@ mod.get = function (req, res) {
     mysqltxt = 'select top 20 *,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ' + mywhere +' order by ZDATE desc ';
   }
   else{
-    mysqltxt = 'select TOP 20 *,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv  from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ZID not in(' + 
-              'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ2 where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by a.ZDATE desc ';
+    mysqltxt = 'select TOP ' + 20 * page  +' *,CONVERT(varchar(100), ZDATE, 20) as myd,b.ZNAME,ISNULL(b.ZBASE,0) as bv  from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD) where ZID not in(' + 
+              'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ2 as a left join TB_NAME2 as b on (a.ZCODE=b.ZSTCD)  where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by a.ZDATE desc ';
   };
   
   
