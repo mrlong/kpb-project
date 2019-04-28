@@ -41,7 +41,7 @@ mod.get = function (req, res) {
     mysqltxt = 'select top 20 *,CONVERT(varchar(100), ZDATE, 20) as myd from TB_SB_REQ2  where ' + mywhere +' order by ZDATE desc ';
   }
   else{
-    mysqltxt = 'select TOP ' + 20 * page  +' *,CONVERT(varchar(100), ZDATE, 20) as myd from TB_SB_REQ2  where ZID not in(' + 
+    mysqltxt = 'select TOP ' + 20   +' *,CONVERT(varchar(100), ZDATE, 20) as myd from TB_SB_REQ2  where ZID not in(' + 
               'select TOP ' + 20 * (page -1) + ' ZID from TB_SB_REQ2  where ' + mywhere +  '  order by ZDATE desc) and '+ mywhere +' order by ZDATE desc ';
   };
   
